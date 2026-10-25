@@ -1,0 +1,67 @@
+export type UserRole = 'faculty' | 'hod' | 'admin';
+
+export type LeaveType =
+  | 'Casual Leave (CL)'
+  | 'Earned Leave (EL)'
+  | 'Medical Leave (ML)'
+  | 'Duty Leave (DL)'
+  | 'Special Casual Leave (SCL)';
+
+export type LeaveStatus =
+  | 'Pending HOD'
+  | 'Approved'
+  | 'Rejected'
+  | 'Clarification Requested';
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: UserRole;
+  department: string;
+  designation: string;
+  employeeId: string;
+  phone?: string;
+  joiningDate?: string;
+}
+
+export interface LeaveRequest {
+  id: string;
+  facultyId: string;
+  facultyName: string;
+  department: string;
+  designation: string;
+  employeeId: string;
+  leaveType: LeaveType;
+  startDate: string;
+  endDate: string;
+  totalDays: number;
+  reason: string;
+  status: LeaveStatus;
+  appliedOn: string;
+  hodComment?: string;
+  documentUrl?: string;
+  clarificationResponse?: string;
+}
+
+export interface LeaveCategoryBalance {
+  total: number;
+  used: number;
+  remaining: number;
+}
+
+export interface LeaveBalance {
+  casualLeave: LeaveCategoryBalance;
+  earnedLeave: LeaveCategoryBalance;
+  medicalLeave: LeaveCategoryBalance;
+  dutyLeave: LeaveCategoryBalance;
+}
+
+export interface DepartmentSummary {
+  id: string;
+  name: string;
+  code: string;
+  hodName: string;
+  totalFaculty: number;
+  activeLeavesToday: number;
+}
